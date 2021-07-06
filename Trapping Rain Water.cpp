@@ -49,6 +49,8 @@ Constraints:
 0 <= Ai <= 108
 */
 
+// Takes Space of O(N)
+/*
     int trappingWater(int arr[], int n){
         // Code here
         int left[n];
@@ -85,4 +87,34 @@ Constraints:
            // sum= sum + ;
         }
         return sum;
+    }
+*/
+
+// Space and Time optimized one, taking max left, right at that particular instance
+
+    int trappingWater(int arr[], int n){
+        // Code here
+        int lo=0;
+        int hi=n-1;
+        int total=0;
+        int max_left = INT_MIN;
+        int max_right = INT_MIN;
+        while(lo<=hi){
+            if(arr[lo]<=arr[hi]){
+                if(arr[lo]>max_left){
+                    max_left = arr[lo];
+                }else{
+                    total+= max_left-arr[lo];
+                }
+                lo++;
+            }else{
+                if(arr[hi]>max_right){
+                    max_right=arr[hi];
+                }else{
+                    total+= max_right-arr[hi];
+                }
+                hi--;
+            }
+        }
+        return total;
     }
