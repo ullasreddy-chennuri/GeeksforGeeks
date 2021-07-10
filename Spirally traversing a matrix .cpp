@@ -73,3 +73,41 @@ Constraints:
         }
         return res;
     }
+
+
+
+// Solved using recurssion same approach diff implementation
+
+   void print_mat(vector<vector<int>> arr,int i,int j,int m,int n,vector<int> &res){
+        if(i>=m || j>=n){
+            return;
+        }
+        for(int p=j;p<n;p++){
+            res.push_back(arr[i][p]);
+        }
+        
+        for(int p=i+1;p<m;p++){
+            res.push_back(arr[p][n-1]);
+        }
+        
+        if(m-1!=i){
+            for(int p=n-2;p>=j;p--){
+                res.push_back(arr[m-1][p]);
+            }
+        }
+        if(n-1!=j){
+            for(int p=m-2;p>i;p--){
+                res.push_back(arr[p][j]);
+            }    
+        }
+        print_mat(arr,i+1,j+1,m-1,n-1,res);
+    }
+    
+    vector<int> spirallyTraverse(vector<vector<int> > arr, int r, int c) 
+    {
+        // code here 
+        vector<int> res;
+        print_mat(arr,0,0,r,c,res);
+        return res;
+    }
+
